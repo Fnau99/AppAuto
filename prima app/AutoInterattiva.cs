@@ -47,7 +47,6 @@ namespace prima_app
 						this.Rifornimento();
 						//stampo lo stato
 						this.StampaStato();
-
 						break;
 					case "0":
 						//esco

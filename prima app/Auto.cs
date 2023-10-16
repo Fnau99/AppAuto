@@ -109,7 +109,7 @@ namespace prima_app
 		{
 			string result;
 
-			result = $"carburante: {this.livelloCarburante} \n";
+			result = "carburante: " + this.livelloCarburante + " \n";
 			if (this.accesa)
 			{
 				//se il veicolo è acceso, scrivo "accesa"
@@ -176,7 +176,7 @@ namespace prima_app
 			Int32.TryParse(Console.ReadLine(), out fillchoice);
 
 			if (fillchoice > 0)
-				this.livelloCarburante = fillchoice;
+				this.livelloCarburante += fillchoice;
 			else
 				Console.WriteLine("Non puoi inserire un numero negativo");
 		}
