@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ namespace prima_app
 		public string modello;
 		public string colore;
 		public Motore tipoMotore;
+		public int carburante;
 
 		private bool accesa;
 
@@ -39,30 +41,38 @@ namespace prima_app
 
 		#region  " metodi "
 
-		//costruttore
-		public Auto()
+		//Overload di costruttori per rendere il codice più pulito e più facile da manutentare.
+		public Auto() : this("ferrari", "modello", "rosso", Motore.benzina, 100, 0, 0)
 		{
-			this.marca = "Fiat";
-			this.modello = "Punto";
-			this.tipoMotore = Motore.diesel;
-			this.colore = "Rosso";
-			this.livelloMassimoCarburante = 100;
-		}
+        }
+        private void init(string marca, string modello, string colore, Motore tipoMotore, int livelloMassimoCarburante, int carburante, int livelloCarburante)
+        {
+            this.marca = marca;
+            this.modello = modello;
+            this.colore = colore;
+            this.tipoMotore = tipoMotore;
+            this.carburante = carburante;
+            this.livelloMassimoCarburante = livelloMassimoCarburante;
+            this.livelloCarburante = livelloCarburante;
+        }
 
-		/// <summary>
-		/// Inizializza l'oggetto
-		/// </summary>
-		/// <param name="marca">Marca del veicolo (es: Fiat)</param>
-		/// <param name="modello">Modello del veicolo (es: Punto)</param>
-		/// <param name="colore">Colore del veicolo</param>
-		/// <param name="tipoMotore">Tipo di motore (a scelta fra quelli disponibili)</param>
-		public Auto(string marca, string modello, string colore, Motore tipoMotore)
+
+        /// <summary>
+        /// Inizializza l'oggetto
+        /// </summary>
+        /// <param name="marca">Marca del veicolo (es: Fiat)</param>
+        /// <param name="modello">Modello del veicolo (es: Punto)</param>
+        /// <param name="colore">Colore del veicolo</param>
+        /// <param name="tipoMotore">Tipo di motore (a scelta fra quelli disponibili)</param>
+        public Auto(string marca, string modello, string colore, Motore tipoMotore, int livelloMassimoCarburante, int carburante, int livelloCarburante)
 		{
 			this.marca = marca;
 			this.modello = modello;
 			this.colore = colore;
 			this.tipoMotore = tipoMotore;
-			this.livelloCarburante = 0;
+			this.carburante = carburante;
+			this.livelloMassimoCarburante = livelloMassimoCarburante;
+			this.livelloCarburante = livelloCarburante;
 		}
 
 		/// <summary>
@@ -156,19 +166,22 @@ namespace prima_app
 		/// Aggiunge carburante all'auto
 		/// </summary>
 		/// <param name="carburante">Quantità di carburante da aggiungere</param>
-		public void Rifornisci(int carburante)
+		public void Rifornisci()
 		{
+			carburante = this.Rifornimento();
 			//se il valore è positivo, lo aggiungo
-			if (carburante > 0){
+			if (carburante > 0)
+			{
 				this.livelloCarburante += carburante;
 				//se il totale è superiore al valore massimo, torno al valore massimo
-				if (this.livelloCarburante > this.livelloMassimoCarburante){
+				if (this.livelloCarburante > this.livelloMassimoCarburante)
+				{
 					this.livelloCarburante = this.livelloMassimoCarburante;
 				}
 			}
 		}
 
-		public void Rifornimento()
+		public int Rifornimento()
 		{
 			int fillchoice;
 
@@ -179,6 +192,8 @@ namespace prima_app
 				this.livelloCarburante += fillchoice;
 			else
 				Console.WriteLine("Non puoi inserire un numero negativo");
+
+			return fillchoice;
 		}
 
 		#endregion
