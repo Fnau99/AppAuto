@@ -62,7 +62,7 @@ namespace prima_app
 			this.modello = modello;
 			this.colore = colore;
 			this.tipoMotore = tipoMotore;
-			this.livelloCarburante = 10;
+			this.livelloCarburante = 0;
 		}
 
 		/// <summary>
@@ -156,7 +156,8 @@ namespace prima_app
 		/// Aggiunge carburante all'auto
 		/// </summary>
 		/// <param name="carburante">Quantità di carburante da aggiungere</param>
-		public void Rifornisci(int carburante){
+		public void Rifornisci(int carburante)
+		{
 			//se il valore è positivo, lo aggiungo
 			if (carburante > 0){
 				this.livelloCarburante += carburante;
@@ -165,6 +166,19 @@ namespace prima_app
 					this.livelloCarburante = this.livelloMassimoCarburante;
 				}
 			}
+		}
+
+		public void Rifornimento()
+		{
+			int fillchoice;
+
+			Console.WriteLine("Quanto carburante vuoi inserire: ");
+			Int32.TryParse(Console.ReadLine(), out fillchoice);
+
+			if (fillchoice > 0)
+				this.livelloCarburante = fillchoice;
+			else
+				Console.WriteLine("Non puoi inserire un numero negativo");
 		}
 
 		#endregion

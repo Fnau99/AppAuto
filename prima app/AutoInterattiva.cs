@@ -44,7 +44,7 @@ namespace prima_app
 						break;
 					case "3":
 						//rifornisco l'auto
-						this.Rifornisci(10);
+						this.Rifornimento();
 						//stampo lo stato
 						this.StampaStato();
 
